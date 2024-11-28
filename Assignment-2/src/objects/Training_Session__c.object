@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Session_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Session Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>WEBINAR</fullName>
+                    <default>false</default>
+                    <label>WEBINAR</label>
+                </value>
+                <value>
+                    <fullName>SEMINAR</fullName>
+                    <default>false</default>
+                    <label>SEMINAR</label>
+                </value>
+                <value>
+                    <fullName>WORKSHOP</fullName>
+                    <default>false</default>
+                    <label>WORKSHOP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>
