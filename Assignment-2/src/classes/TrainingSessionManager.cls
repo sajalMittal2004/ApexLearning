@@ -1,6 +1,7 @@
 /** 
  * 
- * Purpose          :   Class to create separate methods to perform DML operations such as Insert, update, and Delete, and to demonstrate the use of Enum, Set, and Safe Navigation Operator in Apex(Assignment-2).
+ * Purpose          :   Class to create separate methods to perform DML operations such as Insert, update, and Delete, 
+ *                      and to demonstrate the use of Enum, Set, and Safe Navigation Operator in Apex(Assignment-2).
  * 
  * Created by       :   Sajal Mittal
  * 
