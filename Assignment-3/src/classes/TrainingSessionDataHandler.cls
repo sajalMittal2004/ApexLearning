@@ -90,7 +90,9 @@ public with sharing class TrainingSessionDataHandler {
      * return       :   void
     **/
     public static void bulkDeleteOperation(){
-        List<Training_Session__c> listOfTrainingSessionToDelete = [SELECT Id, Name, Session_Type__c FROM training_Session__c WHERE Session_Type__c = 'SEMINAR'];
+        List<Training_Session__c> listOfTrainingSessionToDelete = [SELECT Id, Name, Session_Type__c 
+                                                                   FROM training_Session__c 
+                                                                   WHERE Session_Type__c = 'SEMINAR'];
         if(!listOfTrainingSessionToDelete.isEmpty()){
             Database.DeleteResult[] drList = Database.delete(listOfTrainingSessionToDelete, false);
             List<Id> listOfIdsOfSuccessfullyDeletedrecord = new List<Id>();
