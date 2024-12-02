@@ -38,8 +38,8 @@ public with sharing class TrainingSessionManager {
         }catch(DMLException e){
             System.debug('Error found: '+e.getMessage());
         }
-        
     }
+
     /**
      * Method Name  :   readTrainingSession
      * 
@@ -57,6 +57,7 @@ public with sharing class TrainingSessionManager {
                                                                                             WHERE Name =: nameOfSession]);
         System.debug(listOfSession);
     }
+
     /**
      * Method Name  :   updateTrainingSession
      * 
@@ -85,6 +86,7 @@ public with sharing class TrainingSessionManager {
             }
         }
     }
+
     /**
      * Method Name  :   deleteTrainingSession
      * 
@@ -108,6 +110,7 @@ public with sharing class TrainingSessionManager {
             }
         }
     }
+
      /**
      * Method Name  :   addAttendeeRecords
      * 
@@ -120,18 +123,18 @@ public with sharing class TrainingSessionManager {
      * return       :   void
     **/
     public static void addAttendeeRecords(Id sessionId, List<Attendee__c> listofAttendeeToInsert){
-        List<Attendee__c> listOfExistingAttendees = [SELECT Id, Name, Session__c, Phone__c FROM Attendee__c WHERE Session__c =: sessionId];
-        Set<String> setOfExistingPhone = new Set<String>();
+        List<Attendee__c> listOfExistingAttendees = [SELECT Id, Name, Session__c, Phone__c, Email__c FROM Attendee__c WHERE Session__c =: sessionId];
+        Set<String> setOfExistingEmail = new Set<String>();
         List<Attendee__c> listOfAttendeeToBeInserted = new List<Attendee__c>();
 
         for(Attendee__c ExistingAttendee: listOfExistingAttendees){
-            setOfExistingPhone.add(ExistingAttendee.Phone__c);
+            setOfExistingEmail.add(ExistingAttendee.Email__c);
         }
         for(Attendee__c attendeeToInsert: listofAttendeeToInsert){
-            if(!setOfExistingPhone.contains(attendeeToInsert.Phone__c)){
+            if(!setOfExistingEmail.contains(attendeeToInsert.Email__c)){
                 attendeeToInsert.Session__c = sessionId;
                 listOfAttendeeToBeInserted.add(attendeeToInsert);
-                setOfExistingPhone.add(attendeeToInsert.Phone__c);
+                setOfExistingEmail.add(attendeeToInsert.Email__c);
             }
         }
         if(!listOfAttendeeToBeInserted.isEmpty()){
@@ -142,6 +145,7 @@ public with sharing class TrainingSessionManager {
             }  
         }
     }
+
     /**
      * Method Name  :   implementationOfSafeNavigation
      * 
