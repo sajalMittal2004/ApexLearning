@@ -52,10 +52,10 @@ public with sharing class TrainingSessionManager {
      * return       :   void
     **/
     public static void readTrainingSession(String nameOfSession) {
-        List<Training_Session__c> listOfSessionForUpdation = new List<Training_Session__c>([SELECT Id, Name, Session_Date__c, Location__c 
+        List<Training_Session__c> listOfSession = new List<Training_Session__c>([SELECT Id, Name, Session_Date__c, Location__c 
                                                                                             FROM Training_Session__c 
                                                                                             WHERE Name =: nameOfSession]);
-        System.debug(listOfSessionForUpdation);
+        System.debug(listOfSession);
     }
     /**
      * Method Name  :   updateTrainingSession
@@ -113,7 +113,7 @@ public with sharing class TrainingSessionManager {
      * 
      * Created by   :   Sajal Mittal
      * 
-     * Purpose      :   Method to add records of Attendee__c on Training_Session__c ensuring easch attendee is only added 
+     * Purpose      :   Method to add records of Attendee__c on Training_Session__c ensuring each attendee is only added once
      * 
      * param        :   Id sessionId, List<Attendee__c> listofAttendeeToInsert
      * 
