@@ -34,7 +34,7 @@ public with sharing class ContactTriggerHandler {
             if(accIds.contains(con.AccountID)){
                 if(accountMap.get(con.AccountId).Domain__c != null){
                     if(!(con.Email != null && con.Email.contains(accountMap.get(con.AccountId).Domain__c))){
-                        con.addError('Either Email is null or does not contain correct domain value');
+                        con.addError('Either Email is null or Domain is not Correct. It Should be '+accountMap.get(con.AccountId).Domain__c);
                     }
                 }
                 else{
