@@ -26,6 +26,10 @@
         <name>CustomObject</name>
     </types>
     <types>
+		<members>OCT_2024_UtilityBar</members>
+		<name>FlexiPage</name>
+	</types>
+    <types>
         <members>Attendee__c-Attendee Layout</members>
         <members>Contact-Contact Layout</members>
         <members>Feedback__c-Feedback Layout</members>
