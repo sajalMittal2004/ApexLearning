@@ -75,8 +75,8 @@ private class ContactTriggerHandlerTest {
         update ContactsToUpdate[33];
         Test.StopTest(); 
 
-        System.assertEquals(TRUE, ContactsToUpdate[12].AccountId == NULL);
-        System.assertEquals('Test@Test1.com',ContactsToUpdate[33].Email);
+        Assert.areEqual(TRUE, ContactsToUpdate[12].AccountId == NULL);
+        Assert.areEqual('Test@Test1.com',ContactsToUpdate[33].Email);
     }
 
     // Method to create fake Contact records
