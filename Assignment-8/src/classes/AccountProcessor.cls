@@ -14,37 +14,33 @@ public with sharing class AccountProcessor {
     // update them in the Number_Of_Contacts__c field on Account object
     @future
     public static void countContacts(List<Id> accIds) {
-        Set<Id> accountIds = new Set<Id>();
+        Map<Id, Integer> mapOfAccountsWithContactsCount = new Map<Id, Integer>();
 
         for(Id id: accIds) {
 
             if(id != NULL) {
-                accountIds.add(id);
+                mapOfAccountsWithContactsCount.put(id, 0);
             }
         }
-        if(!accountIds.isEmpty()) {
+        
+        if(!mapOfAccountsWithContactsCount.keySet().isEmpty()) {
             List<Account> accountsToUpdate = new List<Account>();
-            Map<Id, Integer> mapOfAccountsWithContactsCount = new Map<Id, Integer>();
             for(AggregateResult agr: [SELECT AccountId, COUNT(Id) No_Of_Contacts
                                     FROM Contact 
-                                    WHERE AccountId IN: accountIds
+                                    WHERE AccountId IN: mapOfAccountsWithContactsCount.keySet()
                                     GROUP BY AccountId]) {
                                         mapOfAccountsWithContactsCount.put((Id)agr.get('AccountId'), (Integer)agr.get('No_Of_Contacts'));
             }
-            for(Id accId: accountIds) {
+            
+            for(Id accId: mapOfAccountsWithContactsCount.keySet()) {
                 Account acct = new Account();
                 acct.Id = accId;
-                acct.Number_Of_Contacts__c = 0;
+                acct.Number_Of_Contacts__c = mapOfAccountsWithContactsCount.get(accId);
                 acct.Phone = '1212121212';
 
-                if(mapOfAccountsWithContactsCount.containsKey(accId)){
-                    acct.Number_Of_Contacts__c = mapOfAccountsWithContactsCount.get(accId);
-                } 
-
-                if(accId != null){
-                    accountsToUpdate.add(acct);
-                }
+                accountsToUpdate.add(acct);
             }
+            
             if(!accountsToUpdate.isEmpty()) {
                 update accountsToUpdate;
             }
