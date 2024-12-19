@@ -1,3 +1,14 @@
+/** 
+ * 
+ * Purpose          :   Class to update Lead Source on lead object to DreamSource using Batch Apex
+ * 
+ * Created by       :   Sajal Mittal
+ * 
+ * Created Date     :   18-12-2024
+ * 
+ * Rivision Logs    :   V_1.0 - Created
+ * 
+**/
 global class LeadProcessor implements Database.Batchable<sObject>, Database.Stateful, Schedulable {
     
     Integer recordProcessed = 0;
@@ -24,6 +35,7 @@ global class LeadProcessor implements Database.Batchable<sObject>, Database.Stat
         System.debug('Total record Processed: '+recordProcessed);  
     }
 
+    // execute method for Schedulable Interface
     global void execute(SchedulableContext sc) {
         LeadProcessor lp = new LeadProcessor();
         Database.executeBatch(lp, 100);
