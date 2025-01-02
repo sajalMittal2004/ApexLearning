@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>ArchiveConfigmdt_Handler</members>
+        <members>ArchiveConfigmdt_HandlerTest</members>
+        <members>ArchiveData</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Archive_Config__mdt.Duration__c</members>
+        <members>Archive_Config__mdt.Filter__c</members>
+        <members>Archive_Config__mdt.Object_API_Name__c</members>
+        <members>Archive_Config__mdt.Object_Label__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Archive_Config.Archive_Contracts</members>
+        <members>Archive_Config.Archive_Feedback_Records</members>
+        <members>Archive_Config.Archive_Test_Accounts</members>
+        <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>Archive_Config__mdt</members>
+        <name>CustomObject</name>
+    </types>
+    <version>62.0</version>
+</Package>
