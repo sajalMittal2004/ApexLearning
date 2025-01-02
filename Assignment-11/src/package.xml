@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>ContactTriggerHandler</members>
+        <members>ContactTriggerHandlerTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Contact.Object_Name__c</members>
+        <members>Contact.Picklist_Fields__c</members>
+        <members>Contact.Record_Id__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Contact</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Contact-Contact Layout</members>
+        <members>Contact-Customer Layout</members>
+        <members>Contact-Service Provider Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <name>Profile</name>
+    </types>
+    <version>62.0</version>
+</Package>
