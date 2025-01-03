@@ -144,7 +144,7 @@ private class ContactTriggerHandlerTest {
     }
 
     // Method to create fake Contact records
-    private static List<Contact> CreateContacts() {
+    private static List<Contact> createContacts() {
         List<Account> accounts = [SELECT Id, Name, Domain__c FROM Account WHERE Name LIKE '%Test%'];
         List<Contact> contacts = new List<Contact>();
         for(Integer i = 1; i <= 100; i++) {
@@ -193,7 +193,7 @@ private class ContactTriggerHandlerTest {
     }
 
     // Method to alter fake Contact records
-    private static List<Contact> UpdateContacts(List<Contact> contacts) {
+    private static List<Contact> updateContacts(List<Contact> contacts) {
         List<Account> accounts = [SELECT Id, Domain__c FROM Account WHERE Name LIKE '%Test%'];
         List<Contact> updatedContacts = new List<Contact>();
         Integer i = 0;
