@@ -8,12 +8,12 @@
  * Rivision Logs    :   V_1.0 - Created
  * 
 **/
-@isTest(seeAllData = FALSE)
+@isTest(seeAllData = false)
 private class ContactTriggerHandlerTest {
 
     // Test Setup method for creating pre-required fake data
     @TestSetup
-    static void makeData(){
+    static void testMakeData(){
         List<Account> accList = new list<Account>();
         accList.add(new Account(Name = 'Test Account 1', Phone = '0000000000', Domain__c='test1.com'));
         accList.add(new Account(Name = 'Test Account 2', Phone = '0000000000', Domain__c='test2.com'));
@@ -29,25 +29,25 @@ private class ContactTriggerHandlerTest {
      * if it is associated with an Account and have correct Domain as on Account.
      **/
     @isTest
-    static void myUnitTestForInsertion() {
+    static void testValidateContactEmailDomainForInsertion() {
         List<Contact> contactsToInsert = createContacts();
         
         Test.startTest();
-        insert contactsToInsert[1];
-        insert contactsToInsert[43];
-        insert contactsToInsert[53];
-        insert contactsToInsert[58];
-        insert contactsToInsert[71];
-        try {
-            insert contactsToInsert[17];
-        }catch(Exception e) {
-            Assert.isTrue(!String.isEmpty(e.getMessage()));
-        }
-        try {
-            insert contactsToInsert[11];
-        }catch(Exception e) {
-            Assert.isTrue(!String.isEmpty(e.getMessage()));
-        }
+            insert contactsToInsert[1];
+            insert contactsToInsert[43];
+            insert contactsToInsert[53];
+            insert contactsToInsert[58];
+            insert contactsToInsert[71];
+            try {
+                insert contactsToInsert[17];
+            }catch(Exception e) {
+                Assert.isTrue(!String.isEmpty(e.getMessage()));
+            }
+            try {
+                insert contactsToInsert[11];
+            }catch(Exception e) {
+                Assert.isTrue(!String.isEmpty(e.getMessage()));
+            }
         Test.stopTest();
 
         Assert.isTrue(contactsToInsert[1].Email.endsWith('Test1.com'));
@@ -59,18 +59,18 @@ private class ContactTriggerHandlerTest {
      * if it is associated with an Account and have correct Domain as on Account.
      **/
     @isTest
-    static void myUnitTestForUpdation() {
+    static void testValidateContactEmailDomainForUpdation() {
  		List<Contact> conList = [SELECT Id, LastName, Email, Phone, AccountId, Account.Name FROM Contact WHERE Name LIKE 'Test%'];
         List<Contact> ContactsToUpdate = updateContacts(conList);
         
         Test.StartTest();
-        try{
-            update ContactsToUpdate[5];
-        }catch(Exception e) {
-            Assert.isTrue(!String.isEmpty(e.getMessage()));
-        }
-        update ContactsToUpdate[12];
-        update ContactsToUpdate[33];
+            try{
+                update ContactsToUpdate[5];
+            }catch(Exception e) {
+                Assert.isTrue(!String.isEmpty(e.getMessage()));
+            }
+            update ContactsToUpdate[12];
+            update ContactsToUpdate[33];
         Test.StopTest(); 
 
         Assert.areEqual(TRUE, ContactsToUpdate[12].AccountId == NULL);
@@ -91,13 +91,13 @@ private class ContactTriggerHandlerTest {
         String excpn;
 
         Test.startTest();
-        insert con1;
-        insert con3;
-        try {
-            insert con2;
-        }catch(Exception e) {
-            excpn = e.getMessage();
-        }
+            insert con1;
+            insert con3;
+            try {
+                insert con2;
+            }catch(Exception e) {
+                excpn = e.getMessage();
+            }
         Test.stopTest();
 
         List<Contact> insertedRecords = [SELECT Id, Record_ID__c, Object_Name__c, Picklist_Fields__c
@@ -121,27 +121,30 @@ private class ContactTriggerHandlerTest {
         Contact con2 = new Contact(LastName = 'Blank Record');
         insert con1;
         insert con2;
+        con1.Record_ID__c = '';
         con2.Record_ID__c = con1.Id;
 
         Test.startTest();
-        try{
-            update con2;
-        } catch(Exception e) {
-            System.debug('Error: '+e.getMessage());
-        }
-        
+            try{
+                update con1;
+                update con2;
+            } catch(Exception e) {
+                System.debug('Error: '+e.getMessage());
+            }
         Test.stopTest();
 
         List<Contact> insertedRecords = [SELECT Id, Record_ID__c, Object_Name__c, Picklist_Fields__c
                                          FROM Contact
                                          WHERE Name 
                                          LIKE '%Record'];
+        Assert.isTrue(String.isBlank(insertedRecords[0].Object_Name__c), 'Object Name should be Empty.');
+        Assert.isTrue(String.isBlank(insertedRecords[0].Picklist_Fields__c), 'Picklist_Fields__c should be Empty.');
         Assert.areEqual('Contact', insertedRecords[1].Object_Name__c, 'Object Name should be Contact.');
         Assert.isTrue(insertedRecords[1].Picklist_Fields__c.contains('contactsource'), 'Picklist Fields should include contactsource.');        
     }
 
     // Method to create fake Contact records
-    private static List<Contact> createContacts() {
+    private static List<Contact> CreateContacts() {
         List<Account> accounts = [SELECT Id, Name, Domain__c FROM Account WHERE Name LIKE '%Test%'];
         List<Contact> contacts = new List<Contact>();
         for(Integer i = 1; i <= 100; i++) {
@@ -190,7 +193,7 @@ private class ContactTriggerHandlerTest {
     }
 
     // Method to alter fake Contact records
-    private static List<Contact> updateContacts(List<Contact> contacts) {
+    private static List<Contact> UpdateContacts(List<Contact> contacts) {
         List<Account> accounts = [SELECT Id, Domain__c FROM Account WHERE Name LIKE '%Test%'];
         List<Contact> updatedContacts = new List<Contact>();
         Integer i = 0;
